@@ -1,0 +1,24 @@
+<div class="content">
+  <form method="POST" action="<%= url_for :action => :do_login %>">
+    <input type="hidden" name="id" value="<%= @login.object %>"/>
+    <ul>
+    <% if @msg %>
+        <li style="color: red; text-align: center"><%= @msg %></li>
+    <% end %>
+      
+          <li>
+            <label for="login[username]" class="fieldLabel">ユーザ名</label>
+            <input type="text" name="login[username]" <%=
+            placeholder("Username") %> />
+          </li>
+      
+          <li>
+            <label for="login[password]" class="fieldLabel">パスワード</label>
+            <input type="password" name="login[password]" <%=
+            placeholder("Password") %> />
+          </li>
+      
+    </ul>
+    <input type="submit" class="standardButton" value="ログイン"/>
+  </form>
+</div>

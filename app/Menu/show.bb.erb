@@ -1,0 +1,21 @@
+<div id="pageTitle">
+	<h1><%= @menu.id:integer%></h1>
+</div>
+
+<div id="toolbar">
+        <%= link_to "Back", :action => :index %>
+        <%= link_to "Edit", :action => :edit, :id => @menu.object %>
+</div>
+
+
+<div id="content">
+
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">Id:integer</td>
+        <td class="itemValue"><%= @menu.id:integer%></td>
+      </tr>
+      
+    </table>
+</div>

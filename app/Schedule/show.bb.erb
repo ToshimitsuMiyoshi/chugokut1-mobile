@@ -1,0 +1,81 @@
+<div id="pageTitle">
+	<h1><%= @schedule.subject%></h1>
+</div>
+
+<div id="toolbar">
+        <%= link_to "Back", :action => :index %>
+        <%= link_to "Edit", :action => :edit, :id => @schedule.object %>
+</div>
+
+
+<div id="content">
+
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">Subject</td>
+        <td class="itemValue"><%= @schedule.subject%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Description</td>
+        <td class="itemValue"><%= @schedule.description%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">PlannedStartDate</td>
+        <td class="itemValue"><%= @schedule.planned_start_date%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">PlannedStartTime</td>
+        <td class="itemValue"><%= @schedule.planned_start_time%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">PlannedFinishDate</td>
+        <td class="itemValue"><%= @schedule.planned_finish_date%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">PlannedFinishTime</td>
+        <td class="itemValue"><%= @schedule.planned_finish_time%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ActualStartDate</td>
+        <td class="itemValue"><%= @schedule.actual_start_date%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ActualStartTime</td>
+        <td class="itemValue"><%= @schedule.actual_start_time%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ActualFinishDate</td>
+        <td class="itemValue"><%= @schedule.actual_finish_date%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ActualFinishTime</td>
+        <td class="itemValue"><%= @schedule.actual_finish_time%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">CustomerId</td>
+        <td class="itemValue"><%= @schedule.customer_id%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">UserId</td>
+        <td class="itemValue"><%= @schedule.user_id%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Done</td>
+        <td class="itemValue"><%= @schedule.done%></td>
+      </tr>
+      
+    </table>
+</div>

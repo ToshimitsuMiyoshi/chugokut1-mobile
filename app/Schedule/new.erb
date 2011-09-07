@@ -1,0 +1,97 @@
+<div class="pageTitle">
+  <h1>New <%= @schedule.title %></h1>
+</div>
+
+<div class="toolbar">
+  <div class="leftItem backButton">
+    <a class="cancel" href="<%= url_for :action => :index %>">Cancel</a>
+  </div>
+</div>
+
+<div class="content">
+  <form method="POST" action="<%= url_for :action => :create %>">
+    <input type="hidden" name="id" value="<%= @schedule.object %>"/>
+    <ul>
+      
+          <li>
+            <label for="schedule[subject]" class="fieldLabel">Subject</label>
+            <input type="text" name="schedule[subject]" <%=
+            placeholder("Subject") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[description]" class="fieldLabel">Description</label>
+            <input type="text" name="schedule[description]" <%=
+            placeholder("Description") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[planned_start_date]" class="fieldLabel">Planned start date</label>
+            <input type="text" name="schedule[planned_start_date]" <%=
+            placeholder("Planned start date") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[planned_start_time]" class="fieldLabel">Planned start time</label>
+            <input type="text" name="schedule[planned_start_time]" <%=
+            placeholder("Planned start time") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[planned_finish_date]" class="fieldLabel">Planned finish date</label>
+            <input type="text" name="schedule[planned_finish_date]" <%=
+            placeholder("Planned finish date") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[planned_finish_time]" class="fieldLabel">Planned finish time</label>
+            <input type="text" name="schedule[planned_finish_time]" <%=
+            placeholder("Planned finish time") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[actual_start_date]" class="fieldLabel">Actual start date</label>
+            <input type="text" name="schedule[actual_start_date]" <%=
+            placeholder("Actual start date") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[actual_start_time]" class="fieldLabel">Actual start time</label>
+            <input type="text" name="schedule[actual_start_time]" <%=
+            placeholder("Actual start time") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[actual_finish_date]" class="fieldLabel">Actual finish date</label>
+            <input type="text" name="schedule[actual_finish_date]" <%=
+            placeholder("Actual finish date") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[actual_finish_time]" class="fieldLabel">Actual finish time</label>
+            <input type="text" name="schedule[actual_finish_time]" <%=
+            placeholder("Actual finish time") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[customer_id]" class="fieldLabel">Customer</label>
+            <input type="text" name="schedule[customer_id]" <%=
+            placeholder("Customer") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[user_id]" class="fieldLabel">User</label>
+            <input type="text" name="schedule[user_id]" <%=
+            placeholder("User") %> />
+          </li>
+      
+          <li>
+            <label for="schedule[done]" class="fieldLabel">Done</label>
+            <input type="text" name="schedule[done]" <%=
+            placeholder("Done") %> />
+          </li>
+      
+    </ul>
+    <input type="submit" class="standardButton" value="Create"/>
+  </form>
+</div>

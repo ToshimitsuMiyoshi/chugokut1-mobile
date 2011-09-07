@@ -1,0 +1,44 @@
+<div id="pageTitle">
+    <h1>New User</h1>
+</div>
+
+<div id="toolbar">
+    <%= link_to "Back", :action => :index %>
+</div>
+
+
+<div id="content">
+
+    <form method="POST" action="<%= url_for :action => :create %>">
+	    <input type="hidden" name="id" value="<%= @user.object %>"/>
+        <table>
+    		
+    		  <tr>
+    			  <td class="itemLabel">Name: </td>
+    			  <td class="itemValue"><input type="text" name="user[name]"/></td>
+    		  </tr>
+    		
+    		  <tr>
+    			  <td class="itemLabel">Login: </td>
+    			  <td class="itemValue"><input type="text" name="user[login]"/></td>
+    		  </tr>
+    		
+    		  <tr>
+    			  <td class="itemLabel">Passwd: </td>
+    			  <td class="itemValue"><input type="text" name="user[passwd]"/></td>
+    		  </tr>
+    		
+    		  <tr>
+    			  <td class="itemLabel">Email: </td>
+    			  <td class="itemValue"><input type="text" name="user[email]"/></td>
+    		  </tr>
+    		
+    		  <tr>
+    			  <td class="itemLabel">Lock: </td>
+    			  <td class="itemValue"><input type="text" name="user[lock]"/></td>
+    		  </tr>
+    		
+        </table>
+        <input type="submit" class="standardButton" value="Create" />
+    </form>
+</div>

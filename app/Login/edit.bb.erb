@@ -1,0 +1,29 @@
+<div id="pageTitle">
+		<h1>Edit <%= @login.username%></h1>
+</div>
+
+<div id="toolbar">
+    <%= link_to "Back", :action => :show, :id => @login.object %>
+    <%= link_to "Delete", :action => :delete, :id => @login.object %>
+</div>
+
+
+<div id="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+    	<input type="hidden" name="id" value="<%= @login.object %>"/>
+            <table>
+        		
+                    <tr>
+            			<td class="itemLabel">Username: </td>
+              			<td class="itemValue"><input type="text" name="login[username]" value="<%= @login.username %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Password: </td>
+              			<td class="itemValue"><input type="text" name="login[password]" value="<%= @login.password %>"/></td>
+          		    </tr>
+        		
+            </table>
+            <input type="submit" class="standardButton" value="Update" />
+    </form>
+</div>

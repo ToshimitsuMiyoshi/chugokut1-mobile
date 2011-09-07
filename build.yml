@@ -1,0 +1,39 @@
+sdk: "/home/ubuntu/.rvm/gems/ruby-1.9.2-p290@rhodes/gems/rhodes-3.0.2"
+sdkversion: 3.0.1
+name: SalesSupport
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 4.6
+wmsdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
+applog: rholog.txt
+
+capabilities: 
+- gps
+- pim
+- camera
+- vibrate
+- phone
+- bluetooth
+- calendar
+
+iphone:
+  configuration: Debug
+  sdk: iphonesimulator4.3
+  provisionprofile:
+  codesignidentity:
+  entitlements:
+  BundleIdentifier: com.rhomobile.salessupport
+  BundleURLScheme: salessupport
+
+android:
+  extensions: ["nfc"]
+  capabilities:
+  - network_state
+  - sdcard
+  version: 2.3.3
+
+wp:
+  productid: '37a56670-a5df-012e-a802-000c29d1e7ff'
+
+extensions: ["json", "rhoxml", "another-extension"]

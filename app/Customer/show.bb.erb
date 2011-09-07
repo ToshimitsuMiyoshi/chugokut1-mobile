@@ -1,0 +1,51 @@
+<div id="pageTitle">
+	<h1><%= @customer.name%></h1>
+</div>
+
+<div id="toolbar">
+        <%= link_to "Back", :action => :index %>
+        <%= link_to "Edit", :action => :edit, :id => @customer.object %>
+</div>
+
+
+<div id="content">
+
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">Name</td>
+        <td class="itemValue"><%= @customer.name%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Address</td>
+        <td class="itemValue"><%= @customer.address%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Tel</td>
+        <td class="itemValue"><%= @customer.tel%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Fax</td>
+        <td class="itemValue"><%= @customer.fax%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Email</td>
+        <td class="itemValue"><%= @customer.email%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Latitude</td>
+        <td class="itemValue"><%= @customer.latitude%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Longitude</td>
+        <td class="itemValue"><%= @customer.longitude%></td>
+      </tr>
+      
+    </table>
+</div>

@@ -1,0 +1,86 @@
+<script type="text/javascript" src="/public/js/jquery.flickable-1.0b3.min.js"></script>
+<script type="text/javascript"><!--
+  $(function() {
+    // 時間エリアの高さとスクロールの設定
+    $("#scroll_area").height(
+        $(window).height() -
+        $("#toolber").height() -
+        $("#content").height()
+    ).flickable();
+    
+    $(".schedule").each(function() {
+      $(this).bind("click", function() {
+        location.href = "/app/Schedule/{" + $(this).attr("scheduleid") + "}/show";
+      });
+    });
+    
+    $(".schedule_gradient").each(function() {
+      $(this).css(
+        "left",
+        ($(this).parent().width() + 6 - $(this).width()) / 2
+      );
+    });
+    
+  });
+//--></script>
+
+<div class="toolbar" id="toolber">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td rowspan="2">
+        <form action="<%= url_for :controller => :login, :action => :menu %>">
+          <input type="submit" class="standardButton" value="戻る"/>
+        </form>
+      </td>
+      <td colspan="3">
+        <h1 class="date"><%= @day.strftime("%Y") %>/<%= @day.strftime("%m") %></h1>
+      </td>
+      <td rowspan="2">
+        <form action="<%= url_for :action => :day_schedules %>">
+          <input type="submit" class="standardButton" value="当日"/>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <form action="<%= url_for :action => :day_schedules, :query => @yesterday %>">
+          <input type="submit" class="standardButton" style="font-size:36px;padding:0px;" value="＜"/>
+        </form>
+    	</td>
+    	<td>
+      	<h1 class="date"><%= @day.strftime("%d") %></h1>
+    	</td>
+    	<td>
+        <form action="<%= url_for :action => :day_schedules, :query => @tommorow %>">
+          <input type="submit" class="standardButton" style="font-size:36px;padding:0px;" value="＞"/>
+        </form>
+    	</td>
+    </tr>
+  </table>
+</div>
+
+<div class="scroll_area" id="scroll_area">
+  <table class="schedule_grid" cellpadding="0" cellspacing="0">
+  <% 24.times do |time| %>
+    <tr>
+      <td class="schedule_time"><%= "#{time}:00" %></td>
+      <td class="schedule_body">&nbsp;</td>
+    </tr>
+  <% end %>
+  </table>
+  <% @schedules.each do |schedule| %>
+    <div scheduleid="<%= schedule.id %>" class="schedule" style="<%= "top:#{schedule.top}px; height:#{schedule.height}px;" %>">
+      <div class="schedule_gradient"></div>
+      <table class="schedule_table" border="0" cellpadding="0" cellspacing="0">
+        <tr><td class="schedule_title"><%= schedule.parse_start_time.strftime("%H:%M") + "-" + schedule.parse_finish_time.strftime("%H:%M") %></td></tr>
+        <tr><td class="schedule_subject"><%= schedule.subject %><br><%= schedule.url %></td></tr>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<div class="content" id="content">
+  <form method="POST" action="<%= url_for :action => :new %>">
+    <input type="submit" class="standardButton" value="新規スケジュール"/>
+  </form>
+</div>

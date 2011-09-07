@@ -1,0 +1,27 @@
+<div class="pageTitle">
+  <h1>Edit <%= @menu.id:integer %></h1>
+</div>
+
+<div class="toolbar">
+  <div class="leftItem backButton">
+    <a href="<%= url_for :action => :show, :id => @menu.object %>">Cancel</a>
+  </div>
+  <div class="rightItem regularButton">
+    <a class="button" href="<%= url_for :action => :delete, :id => @menu.object %>">Delete</a>
+  </div>
+</div>
+
+<div class="content">
+  <form method="POST" action="<%= url_for :action => :update %>">
+    <input type="hidden" name="id" value="<%= @menu.object %>"/>
+    <ul>
+      
+          <li>
+            <label for="menu[id:integer]" class="fieldLabel">Id:integer</label>
+            <input type="text" name="menu[id:integer]" value="<%= @menu.id:integer %>" <%= placeholder( "Id:integer" ) %> />
+          </li>
+      
+    </ul>
+    <input type="submit" class="standardButton" value="Update"/>
+  </form>
+</div>

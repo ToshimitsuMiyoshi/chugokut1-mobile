@@ -1,0 +1,47 @@
+<div class="pageTitle">
+  <h1>Edit <%= @user.name %></h1>
+</div>
+
+<div class="toolbar">
+  <div class="leftItem backButton">
+    <a href="<%= url_for :action => :show, :id => @user.object %>">Cancel</a>
+  </div>
+  <div class="rightItem regularButton">
+    <a class="button" href="<%= url_for :action => :delete, :id => @user.object %>">Delete</a>
+  </div>
+</div>
+
+<div class="content">
+  <form method="POST" action="<%= url_for :action => :update %>">
+    <input type="hidden" name="id" value="<%= @user.object %>"/>
+    <ul>
+      
+          <li>
+            <label for="user[name]" class="fieldLabel">Name</label>
+            <input type="text" name="user[name]" value="<%= @user.name %>" <%= placeholder( "Name" ) %> />
+          </li>
+      
+          <li>
+            <label for="user[login]" class="fieldLabel">Login</label>
+            <input type="text" name="user[login]" value="<%= @user.login %>" <%= placeholder( "Login" ) %> />
+          </li>
+      
+          <li>
+            <label for="user[passwd]" class="fieldLabel">Passwd</label>
+            <input type="text" name="user[passwd]" value="<%= @user.passwd %>" <%= placeholder( "Passwd" ) %> />
+          </li>
+      
+          <li>
+            <label for="user[email]" class="fieldLabel">Email</label>
+            <input type="text" name="user[email]" value="<%= @user.email %>" <%= placeholder( "Email" ) %> />
+          </li>
+      
+          <li>
+            <label for="user[lock]" class="fieldLabel">Lock</label>
+            <input type="text" name="user[lock]" value="<%= @user.lock %>" <%= placeholder( "Lock" ) %> />
+          </li>
+      
+    </ul>
+    <input type="submit" class="standardButton" value="Update"/>
+  </form>
+</div>

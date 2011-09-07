@@ -1,0 +1,94 @@
+#require 'rho/rhocontroller'
+require 'base_controller'
+require 'helpers/browser_helper'
+
+class LoginController < BaseController
+  include BrowserHelper
+
+  # GET /Login/new
+  def new
+    @login = Login.new
+    render :action => :new, :back => url_for(:action => :new)
+  end
+
+  # POST /Login/do_login
+  def do_login
+    login = @params["login"]
+    if login["username"].to_s != "" and login["password"].to_s != ""
+      username = login["username"]
+      password = login["password"]
+
+      begin
+        Rho::AsyncHttp.get(
+          :url => "http://192.168.191.143/users/login_check.xml",
+          :callback => url_for(:action => :httpget_callback),
+          :body => "username=#{username}&password=#{password}"
+        )
+        render :action => :wait
+      rescue Rho::RhoError => e
+        @msg = e.message
+        @login = Login.new
+        render :action => :new
+      end
+    else
+#      @msg = Rho::RhoError.err_message(Rho::RhoError::ERR_UNATHORIZED) unless @msg && @msg.length > 0
+      @msg = "missing username or password"
+      @login = Login.new
+      render :action => :new
+    end
+  end
+
+  def httpget_callback
+    @@get_result = nil
+    @@error_params = nil
+    
+    if @params["status"] != "ok"
+      @@error_params = @params
+      WebView.navigate( url_for(:action => :show_error) )
+    else
+      @@get_result = @params["body"]
+      begin
+        require "rexml/document"
+        doc = REXML::Document.new(@@get_result)
+        doc.elements.each("user/username") { |element|
+          self.username = element.text
+          puts "doc : #{element.text}"
+        }
+      rescue Exception => e
+        puts "Error : #{e}"
+        @@get_result = "Error : #{e}"
+      end
+      
+      WebView.navigate( url_for(:action => :show_result) )
+    end
+  end
+
+  def show_result
+    @msg = "show_result"
+    if @@get_result
+      render :action => :menu, :back => false
+    else
+      render :action => :new, :back => url_for(:action => :new)
+    end
+  end
+
+  def show_error
+    render :action => :error, :back => url_for(:action => :new)
+  end
+    
+  def get_res
+    @@get_result
+  end
+
+  def get_error
+    @@error_params
+  end
+
+  def cancel_httpcall
+    Rho::AsyncHttp.cancel( url_for(:action => :httpget_callback) )
+
+    @@get_result  = 'Request was cancelled.'
+    render :action => :webservicetest, :back => url_for(:action => :index)
+  end
+
+end

@@ -1,0 +1,23 @@
+<div class="pageTitle">
+  <h1><%= @menu.id:integer %></h1>
+</div>
+
+<div class="toolbar">
+  <div class="leftItem backButton">
+    <a href="<%= url_for :action => :index %>">Back</a>
+  </div>
+  <div class="rightItem regularButton">
+    <a href="<%= url_for :action => :edit, :id => @menu.object %>">Edit</a>
+  </div>
+</div>
+
+<div class="content">
+  <ul>
+    
+        <li>
+          <div class="itemLabel">Id:integer</div>
+          <div class="itemValue"><%= @menu.id:integer %></div>
+        </li>
+    
+  </ul>
+</div>

@@ -1,0 +1,61 @@
+<div class="pageTitle">
+  <h1>New <%= @customer.title %></h1>
+</div>
+
+<div class="toolbar">
+  <div class="leftItem backButton">
+    <a class="cancel" href="<%= url_for :action => :index %>">Cancel</a>
+  </div>
+</div>
+
+<div class="content">
+  <form method="POST" action="<%= url_for :action => :create %>">
+    <input type="hidden" name="id" value="<%= @customer.object %>"/>
+    <ul>
+      
+          <li>
+            <label for="customer[name]" class="fieldLabel">Name</label>
+            <input type="text" name="customer[name]" <%=
+            placeholder("Name") %> />
+          </li>
+      
+          <li>
+            <label for="customer[address]" class="fieldLabel">Address</label>
+            <input type="text" name="customer[address]" <%=
+            placeholder("Address") %> />
+          </li>
+      
+          <li>
+            <label for="customer[tel]" class="fieldLabel">Tel</label>
+            <input type="text" name="customer[tel]" <%=
+            placeholder("Tel") %> />
+          </li>
+      
+          <li>
+            <label for="customer[fax]" class="fieldLabel">Fax</label>
+            <input type="text" name="customer[fax]" <%=
+            placeholder("Fax") %> />
+          </li>
+      
+          <li>
+            <label for="customer[email]" class="fieldLabel">Email</label>
+            <input type="text" name="customer[email]" <%=
+            placeholder("Email") %> />
+          </li>
+      
+          <li>
+            <label for="customer[latitude]" class="fieldLabel">Latitude</label>
+            <input type="text" name="customer[latitude]" <%=
+            placeholder("Latitude") %> />
+          </li>
+      
+          <li>
+            <label for="customer[longitude]" class="fieldLabel">Longitude</label>
+            <input type="text" name="customer[longitude]" <%=
+            placeholder("Longitude") %> />
+          </li>
+      
+    </ul>
+    <input type="submit" class="standardButton" value="Create"/>
+  </form>
+</div>

@@ -1,0 +1,84 @@
+<div id="pageTitle">
+		<h1>Edit <%= @schedule.subject%></h1>
+</div>
+
+<div id="toolbar">
+    <%= link_to "Back", :action => :show, :id => @schedule.object %>
+    <%= link_to "Delete", :action => :delete, :id => @schedule.object %>
+</div>
+
+
+<div id="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+    	<input type="hidden" name="id" value="<%= @schedule.object %>"/>
+            <table>
+        		
+                    <tr>
+            			<td class="itemLabel">Subject: </td>
+              			<td class="itemValue"><input type="text" name="schedule[subject]" value="<%= @schedule.subject %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Description: </td>
+              			<td class="itemValue"><input type="text" name="schedule[description]" value="<%= @schedule.description %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Planned start date: </td>
+              			<td class="itemValue"><input type="text" name="schedule[planned_start_date]" value="<%= @schedule.planned_start_date %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Planned start time: </td>
+              			<td class="itemValue"><input type="text" name="schedule[planned_start_time]" value="<%= @schedule.planned_start_time %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Planned finish date: </td>
+              			<td class="itemValue"><input type="text" name="schedule[planned_finish_date]" value="<%= @schedule.planned_finish_date %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Planned finish time: </td>
+              			<td class="itemValue"><input type="text" name="schedule[planned_finish_time]" value="<%= @schedule.planned_finish_time %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Actual start date: </td>
+              			<td class="itemValue"><input type="text" name="schedule[actual_start_date]" value="<%= @schedule.actual_start_date %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Actual start time: </td>
+              			<td class="itemValue"><input type="text" name="schedule[actual_start_time]" value="<%= @schedule.actual_start_time %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Actual finish date: </td>
+              			<td class="itemValue"><input type="text" name="schedule[actual_finish_date]" value="<%= @schedule.actual_finish_date %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Actual finish time: </td>
+              			<td class="itemValue"><input type="text" name="schedule[actual_finish_time]" value="<%= @schedule.actual_finish_time %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Customer: </td>
+              			<td class="itemValue"><input type="text" name="schedule[customer_id]" value="<%= @schedule.customer_id %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">User: </td>
+              			<td class="itemValue"><input type="text" name="schedule[user_id]" value="<%= @schedule.user_id %>"/></td>
+          		    </tr>
+        		
+                    <tr>
+            			<td class="itemLabel">Done: </td>
+              			<td class="itemValue"><input type="text" name="schedule[done]" value="<%= @schedule.done %>"/></td>
+          		    </tr>
+        		
+            </table>
+            <input type="submit" class="standardButton" value="Update" />
+    </form>
+</div>
