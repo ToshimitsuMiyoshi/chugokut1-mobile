@@ -37,8 +37,8 @@ body {
     height: 100%;
     width: inherit;
     font-family: "Droid", sans-serif;
-    background: black;
-    color: white;
+    background: white;
+    color: black;
 }
 
 h1 {
@@ -46,7 +46,7 @@ h1 {
 }
 
 .content {
-    background-color: black;
+    background-color: white;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -55,7 +55,7 @@ h1 {
 /* Toolbar */
 
 .toolbar {
-    height: 60px;
+    height: 40px;
     width: 100%;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #2B2B2B), color-stop(0.2, #585858), color-stop(1.0, #2B2B2B));
     display: table;
@@ -70,7 +70,7 @@ h1 {
 }
 
 .toolbar a {
-    line-height: 40px;
+    line-height: 30px;
     color: black;
     display: block;
 }
@@ -85,13 +85,18 @@ h1 {
     border: 1px solid white;
 }
 
+.toolbar h1.date {
+  font-size: 36px;
+  color: white;
+}
+
 /* Header */
 
 .pageTitle {
     height: 25px;
     margin: 0;
     width: 100%;
-    display: none;
+    display: block;
 }
 
 .pageTitle h1 {
@@ -110,7 +115,8 @@ h1 {
 /* lists */
 
 .content ul {
-    background: black;
+    background: white;
+    color: black;
 }
 
 .content ul li {
@@ -121,7 +127,7 @@ h1 {
 .content ul li a {
     display: block;
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 20px;
     height: 100%;
     width: 100%;
@@ -159,6 +165,16 @@ h1 {
     padding: 15px 10px 15px 0;
 }
 
+.content .menu {
+  width: 100%;
+}
+
+.content .menu td {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 /* Forms */
 
 .content form button {
@@ -184,7 +200,7 @@ h1 {
 .content form label {
     float: left;
     display: block;
-    color: white;
+    color: black;
     line-height: 64px;
     padding: 0 10px 0 5px;
     margin: 0;
@@ -208,7 +224,7 @@ h1 {
 }
 
 .content form {
-    background-color: black;
+    background-color: white;
 }
 
 .content form input[type="checkbox"] {
@@ -286,13 +302,123 @@ h1 {
     box-shadow: 0 -1px 3px #000000;
 }
 
-.content form input.standardButton {
+input.standardButton {
     height: 45px;
     margin: 2px 0 2px 0;
     -webkit-border: 2px;
     width: 100%;
 }
 
+.scroll_area {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: scroll;
+  height: 1px;
+  width: 100%;
+}
+
+.scroll_area table {
+  border: 0px;
+  width: 100%;
+}
+
+.scroll_area table tr {
+  width: 100%;
+}
+
+.scroll_area .schedule_grid tr td {
+  border-bottom: 2px dotted #999999;
+  height: 40px;
+}
+
+.scroll_area .schedule_grid .schedule_time {
+  text-align: right;
+  vertical-align: top;
+  width: 60px;
+  background-color: #CCCCCC;
+}
+
+.scroll_area .schedule_grid .schedule_body {
+/*  width: 100%;*/
+  background-color: white;
+  font-size: 1px;
+}
+.scroll_area .schedule {
+  position: absolute;
+  left: 80px;
+  width: 60%;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 3px solid #DDDDDD;
+  background-color: #007AFF;
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  box-shadow: 0px 3px 3px #000000;
+  -moz-box-shadow: 0px 3px 3px #000000;
+  -webkit-box-shadow: 0px 3px 3px #000000;
+}
+.scroll_area .schedule .schedule_gradient {
+  position: absolute;
+  top: 3px;
+  width: 80%;
+  height: 50%;
+  border: 0px;
+  background: -moz-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.3)), to(rgba(255,255,255,0.1)));
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+.scroll_area .schedule .schedule_table {
+  border: 0px;
+  width: 100%;
+  height: 100%;
+}
+.scroll_area .schedule .schedule_title {
+  width: 100%;
+  height: 20px;
+}
+.scroll_area .schedule .schedule_subject {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+}
+/*
+.scroll_area .show_header {
+  width: 100%;
+  height: 24px;
+  color: white;
+  font-size: 18px;
+  padding-top: 6px;
+  text-indent: 5px;
+  vertical-align: middle;
+  background: -moz-linear-gradient(top, rgba(4,128,177,1.0), rgba(4,156,217,1.0));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(4,128,177,1.0)), to(rgba(4,156,217,1.0)));
+  box-shadow: 0px 3px 3px #000000;
+  -moz-box-shadow: 0px 3px 3px #000000;
+  -webkit-box-shadow: 0px 3px 3px #000000;
+}
+.scroll_area .show_detail {
+  width: 100%;
+  padding-top: 5px;
+  background-color: transparent;
+}
+.scroll_area .show_detail .subtitle {
+  width: 80%;
+  background-color: transparent;
+  border-bottom: 2px solid #0480B1;
+  box-shadow: 0px 3px 3px #000000;
+  -moz-box-shadow: 0px 3px 3px #000000;
+  -webkit-box-shadow: 0px 3px 3px #000000;
+}
+.scroll_area .show_detail .content {
+  width: 80%;
+  text-indent: 15px;
+  background-color: transparent;
+}
+*/
 /* Settings */
 
 .content ul.settings {

@@ -15,11 +15,21 @@ class ScheduleController < BaseController
 
   # GET /Schedule/{1}
   def show
-    @schedule = Schedule.find(@params['id'])
+    @@next_action = :show_schedule
+    @params['id'] =~ /\{(.+)\}/
+    AsyncHttp.get(
+      :url      => "/schedules/#{$+}.json?auth_token=#{current_user.auth_token}",
+      :callback => url_for(:action => :httpget_callback)
+    )
+    render :action => :wait
+  end
+
+  def show_schedule
+    @schedule = Schedule.new(@@get_result)
     if @schedule
-      render :action => :show, :back => url_for(:action => :index)
-    else
-      redirect :action => :index
+      @date = @schedule.parse_start_date
+      @back = {:year => @date.year, :month => @date.month, :day => @date.day}
+      render :action => :show
     end
   end
 
@@ -59,20 +69,6 @@ class ScheduleController < BaseController
     redirect :action => :index
   end
 
-  # GET /Schedule/httpget_callback
-  def httpget_callback
-    @@get_result = nil
-    @@error_params = nil
-    
-    if @params["status"] != "ok"
-      @@error_params = @params
-      WebView.navigate( url_for(:action => :show_error) )
-    else
-      @@get_result = @params["body"]
-      WebView.navigate( url_for(:action => :show_result) )
-    end
-  end
-  
   def day_schedules
     if current_user
       begin
@@ -81,12 +77,13 @@ class ScheduleController < BaseController
         @@month = @params["month"] || time.month
         @@day   = @params["day"] || time.day
         
-        puts ""
-        puts "POST Parameters : auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}&day=#{@@day}"
-        puts ""
+        #puts ""
+        #puts "POST Parameters : auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}&day=#{@@day}"
+        #puts ""
         
+        @@next_action = :show_result
         AsyncHttp.get(
-          :url      => "/schedules.json?auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}&day=#{@@day}",
+          :url      => "/schedules/day.json?auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}&day=#{@@day}",
           :callback => url_for(:action => :httpget_callback)
         )
         
@@ -101,11 +98,27 @@ class ScheduleController < BaseController
     end
   end
   
+  # GET /Schedule/httpget_callback
+  def httpget_callback
+    @@get_result = nil
+    @@error_params = nil
+    
+    if @params["status"] != "ok"
+      @@error_params = @params
+      WebView.navigate( url_for(:action => :show_error) )
+    else
+      @@get_result = @params["body"]
+      WebView.navigate( url_for(:action => @@next_action) )
+    end
+  end
+  
   def show_result
     if @@get_result
       @schedules = []
-      @@get_result.each do |res|
-        @schedules << Schedule.new(res)
+      unless @@get_result == "null"
+        @@get_result.each do |res|
+          @schedules << Schedule.new(res)
+        end
       end
       
       @day = Date::new(@@year.to_i, @@month.to_i, @@day.to_i)

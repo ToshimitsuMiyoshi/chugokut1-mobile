@@ -22,6 +22,7 @@
             <link href="/public/jqtouch/jqtouch-iphone.css" type="text/css" rel="stylesheet"/>
         <% end %>
         <script>jQT = $.jQTouch();</script>
+        <script type="text/javascript" src="/public/js/jquery.flickable-1.0b3.min.js"></script>
     <% end %>
 
     <% if System::get_property('platform') == 'APPLE' %>
@@ -40,6 +41,8 @@
     <% else %>        
 	<link href="/public/css/windows_mobile.css" type="text/css" rel="stylesheet"/>
     <% end %>
+
+	<link href="/public/css/sales_support.css" type="text/css" rel="stylesheet"/>
 </head>
 
 <% if System::get_property('platform') == 'WP7' %>
