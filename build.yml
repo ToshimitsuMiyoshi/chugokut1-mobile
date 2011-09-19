@@ -18,7 +18,8 @@ capabilities:
 - calendar
 
 iphone:
-  configuration: Debug
+  #configuration: Debug
+  configuration: Release
   sdk: iphonesimulator4.3
   provisionprofile:
   codesignidentity:
@@ -31,6 +32,8 @@ android:
   capabilities:
   - network_state
   - sdcard
+  mapping: yes
+  apikey: 0jDNua8T4Teq0RHDk6_C708_Iiv45ys9ZL6bEhw
   version: 2.3.3
 
 wp:
