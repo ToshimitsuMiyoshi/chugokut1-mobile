@@ -5,9 +5,7 @@
         $(window).height() -
         $("#toolber").height() -
         $("#content").height()
-    ).flickable({
-        section: 'tr'
-    });
+    ).flickable();
     
     $(".schedule").each(function() {
       $(this).click(function() {
@@ -22,7 +20,7 @@
       );
     });
     
-    $("#scroll_area").flickable("refresh").flickable("select", <%= @current_hour - 1 %>);
+    $("#scroll_area").flickable("refresh");
   });
 //--></script>
 
