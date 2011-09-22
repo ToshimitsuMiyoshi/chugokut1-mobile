@@ -1,6 +1,7 @@
 #require 'rho/rhocontroller'
 require 'base_controller'
 require 'helpers/browser_helper'
+require 'Map/map_util'
 require 'date'
 require 'time'
 
@@ -27,6 +28,7 @@ class ScheduleController < BaseController
   def show_schedule
     @schedule = Schedule.new(@@get_result)
     if @schedule
+      @customer = Customer.new(@schedule.customer)
       @date = @schedule.parse_start_date
       @back = {:year => @date.year, :month => @date.month, :day => @date.day}
       render :action => :show
@@ -121,6 +123,7 @@ class ScheduleController < BaseController
         end
       end
       
+      @current_hour = Time.new.hour
       @day = Date::new(@@year.to_i, @@month.to_i, @@day.to_i)
       @yesterday = {:year => (@day - 1).year, :month => (@day - 1).month, :day => (@day - 1).day}
       @tommorow = {:year => (@day + 1).year, :month => (@day + 1).month, :day => (@day + 1).day}
@@ -148,5 +151,29 @@ class ScheduleController < BaseController
 
     @@get_result  = 'Request was cancelled.'
     render :action => :webservicetest, :back => url_for(:action => :index)
+  end
+
+  # Post /Schedule/map
+  def map
+     puts "-------------------------"
+     puts @params.inspect
+     address  = @params['map']['address']
+     to_lat   = @params['map']['latitude'].to_f
+     to_lng   = @params['map']['longitude'].to_f
+     puts "to:#{address},#{to_lat},#{to_lng}"
+
+     util = MapUtil.new
+     util.viewMap address, to_lat, to_lng, url_for(:action => :geo_callback)
+
+     render :action => :show
+  end
+
+  # GeoLocation
+  def geo_callback
+     puts "-------------------------"
+     puts @params.inspect
+
+     util = MapUtil.new
+     util.geo_callback @params
   end
 end

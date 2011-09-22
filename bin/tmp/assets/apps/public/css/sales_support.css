@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    height: 100%;
+    width: inherit;
+    font-family: "Droid", sans-serif;
+    background: white;
+    color: black;
+}
+
+.toolbar h1.date {
+  font-size: 36px;
+  color: white;
+}
+
+.content {
+    background-color: white;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header */
+.pageTitle {
+    height: 25px;
+    margin: 0;
+    width: 100%;
+    display: block;
+}
+
+.content ul {
+    background: white;
+    color: black;
+}
+
+.content ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    height: 100%;
+    width: 100%;
+    padding: 15px 0 15px 0;
+    background: url("../images/android/disclosure.png") no-repeat center right;
+}
+
+.content .menu {
+  width: 100%;
+}
+
+.content .menu td {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.content form label {
+    float: left;
+    display: block;
+    color: black;
+    line-height: 64px;
+    padding: 0 10px 0 5px;
+    margin: 0;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content form {
+    background-color: white;
+}
+
+input.standardButton {
+    height: 45px;
+    margin: 2px 0 2px 0;
+    -webkit-border: 2px;
+    width: 100%;
+}
+
+.scroll_area {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: scroll;
+  height: 1px;
+  width: 100%;
+}
+
+.scroll_area table {
+  border: 0px;
+  width: 100%;
+}
+
+.scroll_area table tr {
+  width: 100%;
+}
+
+

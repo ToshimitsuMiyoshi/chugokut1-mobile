@@ -36,6 +36,7 @@
     <activity android:name='com.rhomobile.rhodes.mapview.GoogleMapView'/>
     <activity android:name='com.rhomobile.rhodes.bluetooth.RhoBluetoothDeviceListActivity'/>
     <service android:name='com.rhomobile.rhodes.RhodesService'/>
+    <uses-library android:name='com.google.android.maps'/>
     <provider android:name='com.rhomobile.rhodes.LocalFileProvider' android:authorities='com.rhomobile.salessupport' android:grantUriPermissions='false'>
       <grant-uri-permission android:pathPrefix='/rhodes/apps/'/>
     </provider>

@@ -1,5 +1,6 @@
 Customer/customer
 Login/login
+Map/map
 Menu/menu
 Schedule/schedule
 User/user

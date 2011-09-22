@@ -37,8 +37,8 @@ body {
     height: 100%;
     width: inherit;
     font-family: "Droid", sans-serif;
-    background: white;
-    color: black;
+    background: black;
+    color: white;
 }
 
 h1 {
@@ -46,7 +46,7 @@ h1 {
 }
 
 .content {
-    background-color: white;
+    background-color: black;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -55,7 +55,7 @@ h1 {
 /* Toolbar */
 
 .toolbar {
-    height: 40px;
+    height: 60px;
     width: 100%;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #2B2B2B), color-stop(0.2, #585858), color-stop(1.0, #2B2B2B));
     display: table;
@@ -70,7 +70,7 @@ h1 {
 }
 
 .toolbar a {
-    line-height: 30px;
+    line-height: 40px;
     color: black;
     display: block;
 }
@@ -85,18 +85,13 @@ h1 {
     border: 1px solid white;
 }
 
-.toolbar h1.date {
-  font-size: 36px;
-  color: white;
-}
-
 /* Header */
 
 .pageTitle {
     height: 25px;
     margin: 0;
     width: 100%;
-    display: block;
+    display: none;
 }
 
 .pageTitle h1 {
@@ -115,8 +110,7 @@ h1 {
 /* lists */
 
 .content ul {
-    background: white;
-    color: black;
+    background: black;
 }
 
 .content ul li {
@@ -127,7 +121,7 @@ h1 {
 .content ul li a {
     display: block;
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 20px;
     height: 100%;
     width: 100%;
@@ -165,16 +159,6 @@ h1 {
     padding: 15px 10px 15px 0;
 }
 
-.content .menu {
-  width: 100%;
-}
-
-.content .menu td {
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 /* Forms */
 
 .content form button {
@@ -200,7 +184,7 @@ h1 {
 .content form label {
     float: left;
     display: block;
-    color: black;
+    color: white;
     line-height: 64px;
     padding: 0 10px 0 5px;
     margin: 0;
@@ -224,7 +208,7 @@ h1 {
 }
 
 .content form {
-    background-color: white;
+    background-color: black;
 }
 
 .content form input[type="checkbox"] {
@@ -302,93 +286,11 @@ h1 {
     box-shadow: 0 -1px 3px #000000;
 }
 
-input.standardButton {
+.content form input.standardButton {
     height: 45px;
     margin: 2px 0 2px 0;
     -webkit-border: 2px;
     width: 100%;
-}
-
-.scroll_area {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  overflow: scroll;
-  height: 1px;
-  width: 100%;
-}
-
-.scroll_area table {
-  border: 0px;
-  width: 100%;
-}
-
-.scroll_area table tr {
-  width: 100%;
-}
-
-.scroll_area .schedule_grid tr td {
-  border-bottom: 2px dotted #999999;
-  height: 40px;
-}
-
-.scroll_area .schedule_grid .schedule_time {
-  text-align: right;
-  vertical-align: top;
-  width: 60px;
-  background-color: #CCCCCC;
-}
-
-.scroll_area .schedule_grid .schedule_body {
-/*  width: 100%;*/
-  background-color: white;
-  font-size: 1px;
-}
-
-.scroll_area .schedule {
-  position: absolute;
-  left: 80px;
-  width: 60%;
-  padding-left: 5px;
-  padding-right: 5px;
-  border: 3px solid #DDDDDD;
-  background-color: #007AFF;
-  border-radius: 20px;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  box-shadow: 0px 3px 3px #000000;
-  -moz-box-shadow: 0px 3px 3px #000000;
-  -webkit-box-shadow: 0px 3px 3px #000000;
-}
-
-.scroll_area .schedule .schedule_gradient {
-  position: absolute;
-  top: 3px;
-  width: 90%;
-  height: 50%;
-  border: 0px;
-  background: -moz-linear-gradient(top, rgba(255,255,255,0.3), rgba(255,255,255,0.0));
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.3)), to(rgba(255,255,255,0.0)));
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-}
-
-.scroll_area .schedule .schedule_table {
-  border: 0px;
-  width: 100%;
-  height: 100%;
-}
-
-.scroll_area .schedule .schedule_title {
-  width: 100%;
-  height: 20px;
-}
-
-.scroll_area .schedule .schedule_subject {
-  width: 100%;
-  height: 100%;
-  vertical-align: top;
 }
 
 /* Settings */

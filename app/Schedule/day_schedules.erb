@@ -5,7 +5,9 @@
         $(window).height() -
         $("#toolber").height() -
         $("#content").height()
-    ).flickable();
+    ).flickable({
+        section: 'tr'
+    });
     
     $(".schedule").each(function() {
       $(this).click(function() {
@@ -20,33 +22,38 @@
       );
     });
     
-    $("#scroll_area").flickable("refresh");
+    $("#scroll_area").flickable("refresh").flickable("select", <%= @current_hour - 1 %>);
   });
 //--></script>
 
 <style type="text/css">
-.scroll_area .schedule_grid tr td {
+.schedule_grid tr td {
   border-bottom: 2px dotted #999999;
   height: 40px;
 }
 
-.scroll_area .schedule_grid .schedule_time {
+.schedule_grid .schedule_time {
   text-align: right;
   vertical-align: top;
   width: 60px;
   background-color: #CCCCCC;
 }
 
-.scroll_area .schedule_grid .schedule_body {
+.schedule_grid .schedule_body {
 /*  width: 100%;*/
   background-color: white;
   font-size: 1px;
 }
-.scroll_area .schedule {
+
+.schedule_grid .schedule_current_hour {
+  background-color: #99CCFF;
+}
+
+.schedule {
   position: absolute;
   left: 80px;
-  width: 60%;
-  padding-left: 5px;
+  width: 62%;
+  padding-left: 10px;
   padding-right: 5px;
   border: 3px solid #DDDDDD;
   background-color: #007AFF;
@@ -57,7 +64,7 @@
   -moz-box-shadow: 0px 3px 3px #000000;
   -webkit-box-shadow: 0px 3px 3px #000000;
 }
-.scroll_area .schedule .schedule_gradient {
+.schedule .schedule_gradient {
   position: absolute;
   top: 3px;
   width: 80%;
@@ -69,19 +76,26 @@
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
-.scroll_area .schedule .schedule_table {
+.schedule .schedule_table {
   border: 0px;
   width: 100%;
   height: 100%;
 }
-.scroll_area .schedule .schedule_title {
+.schedule .schedule_title {
   width: 100%;
   height: 20px;
 }
-.scroll_area .schedule .schedule_subject {
+.schedule .schedule_subject {
   width: 100%;
   height: 100%;
   vertical-align: top;
+}
+.schedule a p {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
 }
 </style>
 
@@ -89,7 +103,7 @@
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
       <td rowspan="2">
-        <form action="<%= url_for :controller => :login, :action => :menu %>">
+        <form action="<%= url_for :controller => :Login, :action => :menu %>">
           <input type="submit" class="standardButton" value="戻る"/>
         </form>
       </td>
@@ -122,10 +136,10 @@
 
 <div class="scroll_area" id="scroll_area">
   <table class="schedule_grid" cellpadding="0" cellspacing="0">
-  <% 24.times do |time| %>
+  <% 24.times do |hour| %>
     <tr>
-      <td class="schedule_time"><%= "#{time}:00" %></td>
-      <td class="schedule_body">&nbsp;</td>
+      <td class="schedule_time <%= "schedule_current_hour" if hour == @current_hour %>"><%= "#{hour}:00" %></td>
+      <td class="schedule_body <%= "schedule_current_hour" if hour == @current_hour %>">&nbsp;</td>
     </tr>
   <% end %>
   </table>
@@ -134,7 +148,7 @@
       <div class="schedule_gradient"></div>
       <table class="schedule_table" border="0" cellpadding="0" cellspacing="0">
         <tr><td class="schedule_title"><%= schedule.parse_start_time.strftime("%H:%M") + "-" + schedule.parse_finish_time.strftime("%H:%M") %></td></tr>
-        <tr><td class="schedule_subject"><%= schedule.subject %><br><%= schedule.url %></td></tr>
+        <tr><td class="schedule_subject"><%= schedule.subject %></td></tr>
       </table>
     </div>
   <% end %>

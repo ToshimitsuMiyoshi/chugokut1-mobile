@@ -107,7 +107,8 @@ class MapUtil
       }
 
       map_params = {
-          :provider => "Google",
+          #:provider => "Google",
+          :provider => "ESRI",
           :settings => {
                         #:map_type => "roadmap",
                         :map_type => "standard",

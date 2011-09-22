@@ -13,11 +13,11 @@ class Schedule
   
   def top
     start_time = parse_start_time
-    (start_time.hour * (40 + 2)) + (40 * (start_time.min / 60.0)) - 1
+    ((start_time.hour * (40 + 2)) + (40 * (start_time.min / 60.0)) - 1).to_i
   end
   def height
     finish_time = parse_finish_time
-    (finish_time.hour * (40 + 2)) + (40 * (finish_time.min / 60.0)) - top - 6 - 3 # ボーダーと影の高さを引く
+    ((finish_time.hour * (40 + 2)) + (40 * (finish_time.min / 60.0)) - top - 6 - 3).to_i # ボーダーと影の高さを引く
   end
   def parse_start_date
     Time.parse(planned_start_date)

@@ -48,6 +48,8 @@ platform/android/Rhodes/src/com/rhomobile/rhodes/mainview/MainView.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/mainview/SimpleMainView.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/mainview/TabbedMainView.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/mapview/Annotation.java
+platform/android/Rhodes/src/com/rhomobile/rhodes/mapview/AnnotationsOverlay.java
+platform/android/Rhodes/src/com/rhomobile/rhodes/mapview/GoogleMapView.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/mapview/MapTouch.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/mapview/MapView.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/mapview/MultiTouchHandler.java
@@ -83,11 +85,11 @@ platform/android/Rhodes/src/com/rhomobile/rhodes/webview/ChromeClientOld.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/webview/RhoWebSettings.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/webview/RhoWebSettingsNew.java
 platform/android/Rhodes/src/com/rhomobile/rhodes/webview/RhoWebSettingsOld.java
-"/home/ubuntu/Documents/1.9.2/Rhodes/SalesSupport/bin/tmp/R.java"
-"/home/ubuntu/Documents/1.9.2/Rhodes/SalesSupport/bin/tmp/AndroidR.java"
-"/home/ubuntu/Documents/1.9.2/Rhodes/SalesSupport/bin/tmp/NativeLibraries.java"
-"/home/ubuntu/Documents/1.9.2/Rhodes/SalesSupport/bin/tmp/Capabilities.java"
-"/home/ubuntu/Documents/1.9.2/Rhodes/SalesSupport/bin/tmp/Push.java"
+"/home/ubuntu/Documents/1.9.2/Rhodes/chugokut1-mobile/bin/tmp/R.java"
+"/home/ubuntu/Documents/1.9.2/Rhodes/chugokut1-mobile/bin/tmp/AndroidR.java"
+"/home/ubuntu/Documents/1.9.2/Rhodes/chugokut1-mobile/bin/tmp/NativeLibraries.java"
+"/home/ubuntu/Documents/1.9.2/Rhodes/chugokut1-mobile/bin/tmp/Capabilities.java"
+"/home/ubuntu/Documents/1.9.2/Rhodes/chugokut1-mobile/bin/tmp/Push.java"
 "/home/ubuntu/.rvm/gems/ruby-1.9.2-p290@rhodes/gems/rhodes-3.0.2/lib/extensions/nfc/ext/nfc/platform/android/src/com/rhomobile/nfc/Nfc.java"
 "/home/ubuntu/.rvm/gems/ruby-1.9.2-p290@rhodes/gems/rhodes-3.0.2/lib/extensions/nfc/ext/nfc/platform/android/src/com/rhomobile/nfc/NfcActivity.java"
 "/home/ubuntu/.rvm/gems/ruby-1.9.2-p290@rhodes/gems/rhodes-3.0.2/lib/extensions/nfc/ext/nfc/platform/android/src/com/rhomobile/nfc/NfcTechActivity.java"

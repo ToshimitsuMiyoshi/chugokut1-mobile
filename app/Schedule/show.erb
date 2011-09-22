@@ -31,6 +31,7 @@
   width: 80%;
   margin-top: 10px;
   background-color: transparent;
+  border-left: 2px solid #0480B1;
   border-bottom: 2px solid #0480B1;
   box-shadow: 0px 3px 3px #000000;
   -moz-box-shadow: 0px 3px 3px #000000;
@@ -41,13 +42,6 @@
   margin-top: 5px;
   margin-left: 15px;
   background-color: transparent;
-}
-.scroll_area .show_detail .content a {
-  background: -moz-linear-gradient(top, rgba(4,128,177,1.0), rgba(4,156,217,1.0));
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(4,128,177,1.0)), to(rgba(4,156,217,1.0)));
-  box-shadow: 0px 3px 3px #000000;
-  -moz-box-shadow: 0px 3px 3px #000000;
-  -webkit-box-shadow: 0px 3px 3px #000000;
 }
 </style>
 
@@ -73,10 +67,16 @@
   <div class="show_detail">
     <div class="subtitle">内容</div>
     <div class="content"><%= @schedule.description %></div>
-    <div class="subtitle">行き先</div>
-    <div class="content"><%= @schedule.description %>
-      <div style="text-align:right;"><a href="/app/Map"><p>ルート表示</p></a></div>
+    <div class="subtitle">顧客名</div>
+    <div class="content"><%= @customer.name %></div>
+    <div class="subtitle">住所</div>
+    <div class="content"><%= @customer.address %>
+      <div style="text-align:right;">
+        <a href="map?map[address]=<%= @customer.name %>&map[latitude]=<%= @customer.latitude %>&map[longitude]=<%= @customer.longitude %>">ルート表示</a>
+      </div>
     </div>
+    <div class="subtitle">電話番号/ＦＡＸ番号</div>
+    <div class="content">TEL:<%= @customer.phone_number %><br/>FAX:<%= @customer.fax_number %></div>
   </div>
 </div>
 
