@@ -1,4 +1,3 @@
-
 module ApplicationHelper
   def strip_braces(str=nil)
     str ? str.gsub(/\{/, "").gsub(/\}/, "") : nil
@@ -125,5 +124,4 @@ module ApplicationHelper
   def caller_request_query_to_hash
     @caller_request = Rho::JSON.parse(@params['caller_request']) if @params['caller_request']
   end
-  
 end

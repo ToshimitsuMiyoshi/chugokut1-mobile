@@ -83,9 +83,9 @@ class ScheduleController < BaseController
         #puts "POST Parameters : auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}&day=#{@@day}"
         #puts ""
         
-        @@next_action = :show_result
+        @@next_action = :show_day
         AsyncHttp.get(
-          :url      => "/schedules/day.json?auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}&day=#{@@day}",
+          :url      => "/schedules.json?auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}&day=#{@@day}",
           :callback => url_for(:action => :httpget_callback)
         )
         
@@ -100,6 +100,63 @@ class ScheduleController < BaseController
     end
   end
   
+  def month_schedules
+    if current_user
+      begin
+        time = Time.new
+        @@year  = @params["year"] || time.year
+        @@month = @params["month"] || time.month
+        
+        #puts ""
+        #puts "POST Parameters : auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}"
+        #puts ""
+        
+        @@next_action = :show_month
+        AsyncHttp.get(
+          :url      => "/schedules.json?auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}",
+          :callback => url_for(:action => :httpget_callback)
+        )
+        
+        render :action => :wait
+      rescue Rho::RhoError => e
+        @msg = e.message
+        @login = Login.new
+        render :action => :new
+      end
+    else
+      WebView.navigate( url_for(:controller => :Login, :action => :new) )
+    end
+  end
+  
+  def week_schedules
+    if current_user
+      begin
+        time = Time.new
+        @@year  = @params["year"] || time.year
+        @@month = @params["month"] || time.month
+        @@day = @params["day"] || time.day
+        
+        #puts ""
+        #puts "POST Parameters : auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}"
+        #puts ""
+        
+        @@next_action = :show_week
+        AsyncHttp.get(
+          :url      => "/schedules.json?auth_token=#{current_user.auth_token}&year=#{@@year}&month=#{@@month}",
+          :callback => url_for(:action => :httpget_callback)
+        )
+        
+        render :action => :wait
+      rescue Rho::RhoError => e
+        @msg = e.message
+        @login = Login.new
+        render :action => :new
+      end
+    else
+      WebView.navigate( url_for(:controller => :Login, :action => :new) )
+    end
+  end
+
   # GET /Schedule/httpget_callback
   def httpget_callback
     @@get_result = nil
@@ -114,7 +171,7 @@ class ScheduleController < BaseController
     end
   end
   
-  def show_result
+  def show_day
     if @@get_result
       @schedules = []
       unless @@get_result == "null"
@@ -125,10 +182,50 @@ class ScheduleController < BaseController
       
       @current_hour = Time.new.hour
       @day = Date::new(@@year.to_i, @@month.to_i, @@day.to_i)
+      @today = {:year => @day.year, :month => @day.month, :day => @day.day}
       @yesterday = {:year => (@day - 1).year, :month => (@day - 1).month, :day => (@day - 1).day}
       @tommorow = {:year => (@day + 1).year, :month => (@day + 1).month, :day => (@day + 1).day}
       
       render :action => :day_schedules
+    else
+      render :action => :new
+    end
+  end
+
+  def show_month
+    if @@get_result
+      @schedules = []
+      unless @@get_result == "null"
+        @@get_result.each do |res|
+          @schedules << Schedule.new(res)
+        end
+      end
+      
+      @month = Date::new(@@year.to_i, @@month.to_i, 1)
+      @this_month = {:year => @month.year,        :month => @month.month}
+      @prev_month = {:year => (@month << 1).year, :month => (@month << 1).month}
+      @next_month = {:year => (@month >> 1).year, :month => (@month >> 1).month}
+      
+      render :action => :month_schedules
+    else
+      render :action => :new
+    end
+  end
+
+  def show_week
+    if @@get_result
+      @schedules = []
+      unless @@get_result == "null"
+        @@get_result.each do |res|
+          @schedules << Schedule.new(res)
+        end
+      end
+      
+      @day = Date::new(@@year.to_i, @@month.to_i, @@day.to_i)
+      @prev_week = {:year => (@day - 6).year, :month => (@day - 6).month, :day => (@day - 6).day}
+      @next_week = {:year => (@day + 6).year, :month => (@day + 6).month, :day => (@day + 6).day}
+      
+      render :action => :week_schedules
     else
       render :action => :new
     end

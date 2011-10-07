@@ -80,7 +80,8 @@ class LoginController < BaseController
   def show_result
     @msg = "show_result"
     if @@get_result
-      render :action => :menu, :back => false
+      #render :action => :menu, :back => false
+      redirect :controller => :Schedule, :action => :day_schedules
     else
       render :action => :new, :back => url_for(:action => :new)
     end

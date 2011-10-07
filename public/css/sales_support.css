@@ -5,11 +5,11 @@ body {
     font-family: "Droid", sans-serif;
     background: white;
     color: black;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.toolbar h1.date {
-  font-size: 36px;
-  color: white;
+.toolbar {
+  height: 85px;
 }
 
 .content {
@@ -95,4 +95,7 @@ input.standardButton {
   width: 100%;
 }
 
-
+.ss_background {
+  background: -moz-linear-gradient(top, rgba(4,128,177,1.0), rgba(4,156,217,1.0));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(4,128,177,1.0)), to(rgba(4,156,217,1.0)));
+}

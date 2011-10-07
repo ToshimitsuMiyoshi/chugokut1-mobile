@@ -1,0 +1,141 @@
+<script type="text/javascript"><!--
+  $(function() {
+    $("#scroll_area").height(
+        $(window).height() -
+        $("#toolber").height() -
+        $("#content").height() - 2
+    ).flickable({section: "tr.flick"});
+    
+    $("td.day").height(($("#scroll_area").height() / 4) - 4);
+    
+    $("div.day_cell").each(function() {
+      $(this).height($(this).parent().height()).width($(this).parent().width()).click(function() {
+        window.location.href = "/app/Schedule/day_schedules?year=" + $(this).attr("year") + "&month=" + $(this).attr("month") + "&day=" + $(this).attr("day");
+      });
+    });
+    
+    $("div.schedule").each(function() {
+      $(this).width($(this).parent().width());
+    });
+    
+    $("#scroll_area").flickable("refresh");
+  });
+//--></script>
+
+<style type="text/css">
+.toolbar h1.date {
+  font-size: 28px;
+  color: white;
+}
+.scroll_area {
+  margin-top: 2px;
+}
+.calendar_table {
+  height: 100%;
+  width: 100%;
+}
+.day_cell {
+  vertical-align: top;
+  overflow: hidden;
+}
+.day {
+  width: 50%;
+  height: 1px;
+  overflow: hidden;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 1px solid #007AFF;
+}
+.sun {
+  color: red;
+  background-color: #FFCCFF;
+}
+.sat {
+  color: blue;
+  background-color: #CCFFFF;
+}
+.holiday {
+  color: red;
+  background-color: #FFCCFF;
+}
+.today {
+  font-weight: bold;
+  background-color: #FFCC99;
+}
+.another {
+  border: 1px solid #999999;
+}
+.content {
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+}
+.actions {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+.action_button {
+  width: 25%;
+  height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+  padding: 0px;
+  margin: 0px;
+  font-size: 10px;
+  font-color: white;
+}
+img {
+  padding: 3px 15px 5px 15px;
+  margin: 0px;
+}
+.action_button_selected {
+  background: -moz-linear-gradient(top, rgba(4,88,137,1.0), rgba(4,116,167,1.0));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(4,88,137,1.0)), to(rgba(4,116,167,1.0)));
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.schedule {
+  color: white;
+  background: -moz-linear-gradient(top, rgba(4,128,177,1.0), rgba(4,156,217,1.0));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(4,128,177,1.0)), to(rgba(4,156,217,1.0)));
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 1px;
+}
+</style>
+
+<div class="toolbar ss_background" id="toolber">
+  <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+    <tr>
+      <td valign="middle">
+        <a href="<%= url_for :action => :week_schedules, :query => @prev_week %>"><img class="nomargin" src="/public/images/allow-left.png"></a>
+      </td>
+      <td valign="middle">
+        <h1 class="date"><%= @day.strftime("%Y") %>/<%= @day.strftime("%m") %></h1>
+      </td>
+      <td valign="middle">
+        <a href="<%= url_for :action => :week_schedules, :query => @next_week %>"><img class="nomargin" src="/public/images/allow-right.png"></a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="scroll_area" id="scroll_area">
+  <%= week(@day.strftime("%Y").to_i, @day.strftime("%m").to_i, @day.strftime("%d").to_i, @schedules) %>
+</div>
+
+<div class="content ss_background" id="content">
+  <div class="actions"><!--
+    --><div class="action_button"><a href="<%= url_for :action => :day_schedules %>"><img src="/public/images/Calendar-Day.png"></a></div><!--
+    --><div class="action_button"><a href="<%= url_for :action => :week_schedules %>"><img class="action_button_selected" src="/public/images/Calendar-Week.png"></a></div><!--
+    --><div class="action_button"><a href="<%= url_for :action => :month_schedules %>"><img src="/public/images/Calendar-Month.png"></a></div><!--
+    --><div class="action_button"><a href="<%= url_for :action => :new %>"><img src="/public/images/Checkmark.png"></a></div><!--
+  --></div>
+</div>

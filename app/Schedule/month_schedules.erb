@@ -1,0 +1,136 @@
+<script type="text/javascript"><!--
+  $(function() {
+    $("#calendar_area").height(
+        $(window).height() -
+        $("#toolber").height() -
+        $("#content").height()
+    );
+    $("td.day").each(function() {
+      $(this).click(function() {
+        window.location.href = "/app/Schedule/day_schedules?year=<%= @month.strftime("%Y") %>&month=<%= @month.strftime("%m") %>&day=" + $(this).attr("day");
+      });
+    });
+  });
+//--></script>
+
+<style type="text/css">
+.toolbar h1.date {
+  font-size: 28px;
+  color: white;
+}
+.calendar_area {
+  width: 100%;
+  border: 0px;
+}
+.calendar_table {
+  border: 1px;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+}
+.calendar_table tr td {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  overflow: hidden;
+  text-align: left;
+  vertical-align: top;
+}
+.calendar_table tr.header {
+  height: 20px;
+}
+.calendar_table tr.header td {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  background: -moz-linear-gradient(top, rgba(4,128,177,1.0), rgba(4,156,217,1.0));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(4,128,177,1.0)), to(rgba(4,156,217,1.0)));
+}
+.calendar_table tr td.day {
+  border: 1px solid #007AFF;
+}
+.calendar_table tr td.sun {
+  color: red;
+  background-color: #FFCCFF;
+}
+.calendar_table tr td.sat {
+  color: blue;
+  background-color: #CCFFFF;
+}
+.calendar_table tr td.holiday {
+  color: red;
+  background-color: #FFCCFF;
+}
+.calendar_table tr td.today {
+  font-weight: bold;
+  background-color: #FFCC99;
+}
+.calendar_table tr td.another {
+  border: 1px solid #999999;
+}
+.content {
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+}
+.actions {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+.action_button {
+  width: 25%;
+  height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+  padding: 0px;
+  margin: 0px;
+  font-size: 10px;
+  font-color: white;
+}
+img {
+  padding: 3px 15px 5px 15px;
+  margin: 0px;
+}
+.action_button_selected {
+  background: -moz-linear-gradient(top, rgba(4,88,137,1.0), rgba(4,116,167,1.0));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(4,88,137,1.0)), to(rgba(4,116,167,1.0)));
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.calendar_table img.nomargin {
+  margin: 0px;
+  padding: 0px;
+}
+</style>
+
+<div class="toolbar ss_background" id="toolber">
+  <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+    <tr>
+      <td valign="middle">
+        <a href="<%= url_for :action => :month_schedules, :query => @prev_month %>"><img class="nomargin" src="/public/images/allow-left.png"></a>
+      </td>
+      <td valign="middle">
+        <h1 class="date"><%= @month.strftime("%Y") %>/<%= @month.strftime("%m") %></h1>
+      </td>
+      <td valign="middle">
+        <a href="<%= url_for :action => :month_schedules, :query => @next_month %>"><img class="nomargin" src="/public/images/allow-right.png"></a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="calendar_area" id="calendar_area">
+  <%= calendar(@month.strftime("%Y").to_i, @month.strftime("%m").to_i, @schedules) %>
+</div>
+
+<div class="content ss_background" id="content">
+  <div class="actions"><!--
+    --><div class="action_button"><a href="<%= url_for :action => :day_schedules %>"><img src="/public/images/Calendar-Day.png"></a></div><!--
+    --><div class="action_button"><a href="<%= url_for :action => :week_schedules %>"><img src="/public/images/Calendar-Week.png"></a></div><!--
+    --><div class="action_button"><a href="<%= url_for :action => :month_schedules %>"><img class="action_button_selected" src="/public/images/Calendar-Month.png"></a></div><!--
+    --><div class="action_button"><a href="<%= url_for :action => :new %>"><img src="/public/images/Checkmark.png"></a></div><!--
+  --></div>
+</div>
