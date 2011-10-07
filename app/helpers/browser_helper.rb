@@ -55,7 +55,7 @@ module BrowserHelper
     tasks = schedules.inject(Array.new) do |tasks, schedule|
       if schedule
         start_day = schedule.parse_start_date.day
-        tasks[start_day] = [] if tasks[day].nil?
+        tasks[start_day] = [] if tasks[start_day].nil?
         tasks[start_day] << schedule
       end
       tasks
