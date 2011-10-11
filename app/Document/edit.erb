@@ -1,0 +1,37 @@
+<div class="pageTitle">
+  <h1>Edit <%= @document.schedule_id %></h1>
+</div>
+
+<div class="toolbar">
+  <div class="leftItem backButton">
+    <a href="<%= url_for :action => :show, :id => @document.object %>">Cancel</a>
+  </div>
+  <div class="rightItem regularButton">
+    <a class="button" href="<%= url_for :action => :delete, :id => @document.object %>">Delete</a>
+  </div>
+</div>
+
+<div class="content">
+  <form method="POST" action="<%= url_for :action => :update %>">
+    <input type="hidden" name="id" value="<%= @document.object %>"/>
+    <ul>
+      
+          <li>
+            <label for="document[schedule_id]" class="fieldLabel">Schedule</label>
+            <input type="text" name="document[schedule_id]" value="<%= @document.schedule_id %>" <%= placeholder( "Schedule" ) %> />
+          </li>
+      
+          <li>
+            <label for="document[name]" class="fieldLabel">Name</label>
+            <input type="text" name="document[name]" value="<%= @document.name %>" <%= placeholder( "Name" ) %> />
+          </li>
+      
+          <li>
+            <label for="document[url]" class="fieldLabel">Url</label>
+            <input type="text" name="document[url]" value="<%= @document.url %>" <%= placeholder( "Url" ) %> />
+          </li>
+      
+    </ul>
+    <input type="submit" class="standardButton" value="Update"/>
+  </form>
+</div>

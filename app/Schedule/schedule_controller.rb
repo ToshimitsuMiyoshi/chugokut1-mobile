@@ -29,6 +29,10 @@ class ScheduleController < BaseController
     @schedule = Schedule.new(@@get_result)
     if @schedule
       @customer = Customer.new(@schedule.customer)
+      @documents = []
+      @schedule.documents.each do |document|
+        @documents << Document.new(document)
+      end
       @date = @schedule.parse_start_date
       @back = {:year => @date.year, :month => @date.month, :day => @date.day}
       render :action => :show

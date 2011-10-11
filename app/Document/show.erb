@@ -1,0 +1,33 @@
+<div class="pageTitle">
+  <h1><%= @document.schedule_id %></h1>
+</div>
+
+<div class="toolbar">
+  <div class="leftItem backButton">
+    <a href="<%= url_for :action => :index %>">Back</a>
+  </div>
+  <div class="rightItem regularButton">
+    <a href="<%= url_for :action => :edit, :id => @document.object %>">Edit</a>
+  </div>
+</div>
+
+<div class="content">
+  <ul>
+    
+        <li>
+          <div class="itemLabel">ScheduleId</div>
+          <div class="itemValue"><%= @document.schedule_id %></div>
+        </li>
+    
+        <li>
+          <div class="itemLabel">Name</div>
+          <div class="itemValue"><%= @document.name %></div>
+        </li>
+    
+        <li>
+          <div class="itemLabel">Url</div>
+          <div class="itemValue"><%= @document.url %></div>
+        </li>
+    
+  </ul>
+</div>

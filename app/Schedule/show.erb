@@ -66,7 +66,13 @@
   <div class="show_header"><%= @schedule.subject %></div>
   <div class="show_detail">
     <div class="subtitle">内容</div>
-    <div class="content"><%= @schedule.description %></div>
+    <div class="content"><%= @schedule.description %>
+<% @documents.each do |document| %>
+      <div style="text-align:right;">
+        <a href="<%= url_for :controller => :Document, :action => :show, :id => document.id %>"><%= document.name %></a>
+      </div>
+<% end %>
+    </div>
     <div class="subtitle">顧客名</div>
     <div class="content"><%= @customer.name %></div>
     <div class="subtitle">住所</div>

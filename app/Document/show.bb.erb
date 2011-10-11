@@ -1,0 +1,31 @@
+<div id="pageTitle">
+	<h1><%= @document.schedule_id%></h1>
+</div>
+
+<div id="toolbar">
+        <%= link_to "Back", :action => :index %>
+        <%= link_to "Edit", :action => :edit, :id => @document.object %>
+</div>
+
+
+<div id="content">
+
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">ScheduleId</td>
+        <td class="itemValue"><%= @document.schedule_id%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Name</td>
+        <td class="itemValue"><%= @document.name%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Url</td>
+        <td class="itemValue"><%= @document.url%></td>
+      </tr>
+      
+    </table>
+</div>
