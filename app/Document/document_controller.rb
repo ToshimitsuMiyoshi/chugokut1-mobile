@@ -19,9 +19,59 @@ class DocumentController < BaseController #Rho::RhoController
 #    else
 #      redirect :action => :index
 #    end
-    @document = Document.new
+#    @document = Document.new
+#    @params['id'] =~ /\{(.+)\}/
+#    WebView.navigate("http://chugokut1.heroku.com/documents/#{$+}/download?auth_token=#{current_user.auth_token}")
+
+    #puts "--------------------------------"
+    #puts @params.inspect
     @params['id'] =~ /\{(.+)\}/
-    WebView.navigate("http://chugokut1.heroku.com/documents/#{$+}/download?auth_token=#{current_user.auth_token}")
+    id = $+
+    url = "http://chugokut1.heroku.com/documents/#{id}/download?auth_token=#{current_user.auth_token}"
+    puts url
+
+    #base_name = File.basename(url)
+    base_name = "document#{id}.pdf"
+    @@file_name = File.join(Rho::RhoApplication::get_base_app_path(), base_name)
+
+    File.delete @@file_name if File.exist?(@@file_name)
+
+    Rho::AsyncHttp.download_file(
+      :url => url,
+      :filename => @@file_name,
+      :headers => {},
+      :callback => (url_for :action => :httpdownload_callback),
+      :callback_param => "" )
+      
+    render :action => :wait
+  end
+  
+  def httpdownload_callback
+    puts "httpdownload_callback: #{@params}"
+    if @params['status'] != 'ok'
+        @@error_params = @params
+        WebView.navigate ( url_for :action => :show_error )        
+    else
+        WebView.navigate ( url_for :action => :show_result )
+    end
+  end
+
+  def show_result
+    #render :action => :index, :back => '/app'
+    System.open_url(@@file_name)
+    redirect '/app'
+  end
+
+  def show_error
+    render :action => :error, :back => '/app'
+  end
+    
+  def cancel_httpcall
+    puts "cancel_httpcall"
+    Rho::AsyncHttp.cancel()  # url_for( :action => :httpdownload_callback) )
+    @@get_result  = 'Request was cancelled.'
+    #render :action => :index, :back => '/app'
+    redirect '/app'
   end
 
   # GET /Document/new
