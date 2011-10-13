@@ -28,7 +28,7 @@ class DocumentController < BaseController #Rho::RhoController
     @params['id'] =~ /\{(.+)\}/
     id = $+
     url = "http://chugokut1.heroku.com/documents/#{id}/download?auth_token=#{current_user.auth_token}"
-    puts url
+    #puts url
 
     #base_name = File.basename(url)
     base_name = "document#{id}.pdf"
@@ -47,7 +47,7 @@ class DocumentController < BaseController #Rho::RhoController
   end
   
   def httpdownload_callback
-    puts "httpdownload_callback: #{@params}"
+    #puts "httpdownload_callback: #{@params}"
     if @params['status'] != 'ok'
         @@error_params = @params
         WebView.navigate ( url_for :action => :show_error )        
@@ -57,13 +57,13 @@ class DocumentController < BaseController #Rho::RhoController
   end
 
   def show_result
-    #render :action => :index, :back => '/app'
     System.open_url(@@file_name)
-    redirect '/app'
+    redirect :controller => :Schedule, :action => :day_schedules
+    #WebView.navigate_back()
   end
 
   def show_error
-    render :action => :error, :back => '/app'
+    render :action => :error, :back => '/app/Schedule/show_day'
   end
     
   def cancel_httpcall
@@ -71,7 +71,7 @@ class DocumentController < BaseController #Rho::RhoController
     Rho::AsyncHttp.cancel()  # url_for( :action => :httpdownload_callback) )
     @@get_result  = 'Request was cancelled.'
     #render :action => :index, :back => '/app'
-    redirect '/app'
+    redirect '/app/Schedule/show_day'
   end
 
   # GET /Document/new
