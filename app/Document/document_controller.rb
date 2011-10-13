@@ -58,20 +58,18 @@ class DocumentController < BaseController #Rho::RhoController
 
   def show_result
     System.open_url(@@file_name)
-    redirect :controller => :Schedule, :action => :day_schedules
-    #WebView.navigate_back()
+    redirect :controller => :Schedule, :action => :show_schedule
   end
 
   def show_error
-    render :action => :error, :back => '/app/Schedule/show_day'
+    render :action => :error, :back => '/app/Schedule/show_schedule'
   end
     
   def cancel_httpcall
-    puts "cancel_httpcall"
+    #puts "cancel_httpcall"
     Rho::AsyncHttp.cancel()  # url_for( :action => :httpdownload_callback) )
     @@get_result  = 'Request was cancelled.'
-    #render :action => :index, :back => '/app'
-    redirect '/app/Schedule/show_day'
+    redirect :controller => :Schedule, :action => :show_schedule
   end
 
   # GET /Document/new
