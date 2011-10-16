@@ -20,7 +20,12 @@
       );
     });
     
-    $("#scroll_area").flickable("refresh");
+    var container = $("div.ui-flickable-container");
+    var current_hour = $("#hour_<%= @current_hour %>");
+    var position = eval(container.css("padding-top").replace("px", "")) + eval(current_hour.position().top);
+    var speed = 500;
+    
+    $("#scroll_area").flickable("refresh").animate({"scrollTop":position}, speed, 'swing');
   });
 //--></script>
 
@@ -55,6 +60,7 @@
 .schedule {
   position: absolute;
   overflow: hidden;
+  height: 0px;
   left: 80px;
   width: 62%;
   padding-left: 10px;
@@ -133,6 +139,9 @@ img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
+.schedule_finished {
+  background-color: #999999;
+}
 </style>
 
 <div class="toolbar ss_background" id="toolber">
@@ -157,19 +166,22 @@ img {
 </div>
 
 <div class="scroll_area" id="scroll_area">
-  <table class="schedule_grid" cellpadding="0" cellspacing="0">
+  <table id="schedule_grid" class="schedule_grid" cellpadding="0" cellspacing="0">
   <% 24.times do |hour| %>
-    <tr>
+    <tr id="hour_<%= hour.to_s %>">
       <td class="schedule_time<%= " schedule_current_hour" if hour == @current_hour %>"><%= "#{hour}:00" %></td>
       <td class="schedule_body<%= " schedule_current_hour" if hour == @current_hour %>">&nbsp;</td>
     </tr>
   <% end %>
   </table>
   <% @schedules.each do |schedule| %>
-    <div scheduleid="<%= schedule.id %>" class="schedule" style="<%= "top:#{schedule.top}px; height:#{schedule.height}px;" %>">
+    <div class="schedule<%= " schedule_finished" if schedule.done %>" style="<%= "top:#{schedule.top}px; height:#{schedule.height}px;" %>" scheduleid="<%= schedule.id %>">
       <div class="schedule_gradient"></div>
       <table class="schedule_table" border="0" cellpadding="0" cellspacing="0">
-        <tr><td class="schedule_title"><%= schedule.parse_start_time.strftime("%H:%M") + "-" + schedule.parse_finish_time.strftime("%H:%M") %></td></tr>
+        <tr><td class="schedule_title">
+          <%= schedule.parse_start_time.strftime("%H:%M") + "-" + schedule.parse_finish_time.strftime("%H:%M") %>
+          <%= "<font color='red' size='-1'>（完了済み）</font>" if schedule.done %>
+        </td></tr>
         <tr><td class="schedule_subject"><%= schedule.subject %></td></tr>
       </table>
     </div>
